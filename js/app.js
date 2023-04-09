@@ -1,11 +1,41 @@
 const container = document.querySelector('#app');
+const modalDetail = document.querySelector('#modal-detail');
+const tableDetail = document.querySelector('#table-detail');
+const btnCloseDetail = document.querySelector('#btn-close-detail');
 
 const categories = [
   {
     id: 1,
     title: 'Gastos fijos',
     limit: 0,
-    spent: 90
+    spent: 90,
+    expenses: [
+      {
+        desc: 'Ice cream',
+        amount: 5.50,
+        date: '08-04-2022'
+      },
+      {
+        desc: 'Gift',
+        amount: 150.50,
+        date: '07-04-2022'
+      },
+      {
+        desc: 'Gift',
+        amount: 150.50,
+        date: '07-04-2022'
+      },
+      {
+        desc: 'Gift',
+        amount: 150.50,
+        date: '07-04-2022'
+      },
+      {
+        desc: 'Gift',
+        amount: 150.50,
+        date: '07-04-2022'
+      },
+    ]
   },
   {
     id: 2,
@@ -59,7 +89,7 @@ const createCardTemplate = (data) => {
       <div class="actions">
         <div class="group">
           <button>Add spent</button>
-          <button>Detail</button>
+          <button class="btn-detail">Detail</button>
         </div>
         <div class="group">
           <button>Update</button>
@@ -71,6 +101,82 @@ const createCardTemplate = (data) => {
   })
 }
 
+const cleanTableTemplate = () => {
+  while(tableDetail.firstChild){
+    tableDetail.removeChild(tableDetail.firstChild);
+  }
+}
+
+const openModalDetail = (id) => {
+
+  const category = categories.filter(c => c.id == id);  
+
+  cleanTableTemplate();
+
+  const header = document.createElement('tr');
+  header.innerHTML = `
+  <tr>
+    <th>Item</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Date</th>
+  </tr>
+  `;
+  tableDetail.appendChild(header);
+
+  category.forEach(categ => {
+    const{ expenses } = categ;
+    expenses.forEach( (exp, index) => {
+      const { desc, amount, date } = exp;
+      const row = document.createElement('tr');
+      row.innerHTML += `
+        <td>${index + 1 }</td>
+        <td>${desc}</td>
+        <td>${amount}</td>
+        <td>${date}</td>
+      `;
+      tableDetail.appendChild(row);
+    })
+  })
+  modalDetail.showModal();
+}
+
+const showModalTemplate = (type, id) => {
+  switch (type) {
+    case 'detail':
+      openModalDetail(id);
+      break;
+    case 'add spent':
+      openModalNewSpent(id);
+      break;
+    case 'update':
+      openModalUpdate(id);
+      break;
+    case 'delete':
+      openModalDelete(id);
+      break;
+    default:
+      break;
+  }
+}
+
+const showDetail = () => {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('click', ev => {
+      if(ev.target.classList.contains('btn-detail')){
+        const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
+        showModalTemplate('detail', idElement);
+      }
+    })
+  })
+}
+
+btnCloseDetail.addEventListener('click', () => {
+  modalDetail.close();
+})
+
 window.addEventListener('DOMContentLoaded', () => {
   createCardTemplate(categories);
+  showDetail();
 })

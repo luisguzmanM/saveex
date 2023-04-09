@@ -70,3 +70,38 @@ body {
 .card .actions .group button {
   flex: 1;
 }
+
+table, tr, th, td {
+  border: 1px solid #DDD;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: center;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  padding: 10px;
+}
+
+dialog::backdrop {
+  background-color: rgba(0,0,0,0.5);
+}
+
+dialog div {
+  position: relative;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+dialog button {
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: transparent;
+}
