@@ -2,14 +2,28 @@ const container = document.querySelector('#app');
 
 const categories = [
   {
+    id: 1,
     title: 'Gastos fijos',
     limit: 0,
     spent: 90
   },
   {
+    id: 2,
     title: 'Diversión',
     limit: 500,
-    spent: 100
+    spent: 100,
+    expenses: [
+      {
+        desc: 'Disco',
+        amount: 55.50,
+        date: '08-04-2022'
+      },
+      {
+        desc: 'Concert',
+        amount: 150.50,
+        date: '07-04-2022'
+      },
+    ]
   }
 ]
 
@@ -20,7 +34,7 @@ const calcProgress = (pLimit, pSpent) => {
 
 const createCardTemplate = (data) => {
   data.forEach(category => {
-    let { title, limit, spent } = category;
+    let { title, limit, spent, id } = category;
 
     let available = limit - spent;
     if(spent > limit) available = 0;
@@ -30,6 +44,7 @@ const createCardTemplate = (data) => {
 
     const card = document.createElement('div');
     card.className = 'card';
+    card.setAttribute('id', id);
     card.innerHTML = `
       <h1>${title}</h1>
       <div class="progressbar">
@@ -44,7 +59,7 @@ const createCardTemplate = (data) => {
       <div class="actions">
         <div class="group">
           <button>Add spent</button>
-          <button>Details</button>
+          <button>Detail</button>
         </div>
         <div class="group">
           <button>Update</button>
