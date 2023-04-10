@@ -19,6 +19,20 @@
       </table>
     </dialog>
 
+    <dialog id="modal-add-spent">
+      <h4>Add spent</h4>
+      <form method="dialog">
+        <label for="desc-spent">Description: </label>
+        <input type="text" placeholder="Example: Rent" id="desc-spent">
+        <label for="amount-spent">Amount: </label>
+        <input type="number" placeholder="Example: 450.50" id="amount-spent">
+        <div>
+          <button value="cancel" id="btn-add-cancel">Cancel</button>
+          <button value="accept" id="btn-add-accept">Add</button>
+        </div>
+      </form>
+    </dialog>
+
     <script src="./js/app.js" type="module"></script>
   </body>
 </html>

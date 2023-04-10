@@ -2,6 +2,7 @@ const container = document.querySelector('#app');
 const modalDetail = document.querySelector('#modal-detail');
 const tableDetail = document.querySelector('#table-detail');
 const btnCloseDetail = document.querySelector('#btn-close-detail');
+const modalAddSpent = document.querySelector('#modal-add-spent');
 
 const categories = [
   {
@@ -67,10 +68,10 @@ const createCardTemplate = (data) => {
     let { title, limit, spent, id } = category;
 
     let available = limit - spent;
-    if(spent > limit) available = 0;
+    if (spent > limit) available = 0;
 
     let progress = (spent * 100) / limit;
-    if(progress > 100) progress = 100;
+    if (progress > 100) progress = 100;
 
     const card = document.createElement('div');
     card.className = 'card';
@@ -88,7 +89,7 @@ const createCardTemplate = (data) => {
       </div>
       <div class="actions">
         <div class="group">
-          <button>Add spent</button>
+          <button class="btn-add-spent">Add spent</button>
           <button class="btn-detail">Detail</button>
         </div>
         <div class="group">
@@ -102,14 +103,14 @@ const createCardTemplate = (data) => {
 }
 
 const cleanTableTemplate = () => {
-  while(tableDetail.firstChild){
+  while (tableDetail.firstChild) {
     tableDetail.removeChild(tableDetail.firstChild);
   }
 }
 
 const openModalDetail = (id) => {
 
-  const category = categories.filter(c => c.id == id);  
+  const category = categories.filter(c => c.id == id);
 
   cleanTableTemplate();
 
@@ -125,12 +126,12 @@ const openModalDetail = (id) => {
   tableDetail.appendChild(header);
 
   category.forEach(categ => {
-    const{ expenses } = categ;
-    expenses.forEach( (exp, index) => {
+    const { expenses } = categ;
+    expenses.forEach((exp, index) => {
       const { desc, amount, date } = exp;
       const row = document.createElement('tr');
       row.innerHTML += `
-        <td>${index + 1 }</td>
+        <td>${index + 1}</td>
         <td>${desc}</td>
         <td>${amount}</td>
         <td>${date}</td>
@@ -160,13 +161,51 @@ const showModalTemplate = (type, id) => {
   }
 }
 
+const openModalNewSpent = (id) => {
+  modalAddSpent.showModal();
+  validateAddNewExpense(id);
+}
+
+const validateAddNewExpense = id => {
+  modalAddSpent.addEventListener('close', ()=>{
+    const desc = document.querySelector('#desc-spent').value;
+    const amount = document.querySelector('#amount-spent').value;
+    if(modalAddSpent.returnValue === 'cancel'){
+      return;
+    } else {
+      if(desc === ''){
+        alert('desc empty');
+        modalAddSpent.showModal();
+      } else {
+        if(amount === ''){
+          alert('amount is empty')
+          modalAddSpent.showModal();
+        } else {
+          saveExpense(id)
+        }
+      }
+    }
+  })
+}
+
+const saveExpense = id => {
+  console.log(id);
+  // Tengo el id, asi que puedo crear el objeto y guardarlo.
+}
+
 const showDetail = () => {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('click', ev => {
-      if(ev.target.classList.contains('btn-detail')){
+      if (ev.target.classList.contains('btn-detail')) {
         const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
         showModalTemplate('detail', idElement);
+        return;
+      }
+      if (ev.target.classList.contains('btn-add-spent')) {
+        const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
+        showModalTemplate('add spent', idElement);
+        return;
       }
     })
   })
