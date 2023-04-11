@@ -166,31 +166,47 @@ const openModalNewSpent = (id) => {
   validateAddNewExpense(id);
 }
 
-const validateAddNewExpense = id => {
-  modalAddSpent.addEventListener('close', ()=>{
-    const desc = document.querySelector('#desc-spent').value;
-    const amount = document.querySelector('#amount-spent').value;
-    if(modalAddSpent.returnValue === 'cancel'){
-      return;
-    } else {
-      if(desc === ''){
-        alert('desc empty');
-        modalAddSpent.showModal();
-      } else {
-        if(amount === ''){
-          alert('amount is empty')
-          modalAddSpent.showModal();
-        } else {
-          saveExpense(id)
-        }
-      }
+const getThisDate = () => {
+  const thisDay = new Date().getDate();
+  const thisMonth = new Date().getMonth() + 1;
+  const thisYear = new Date().getFullYear();
+  return `${thisYear}-${thisMonth}-${thisDay}`;
+}
+
+const saveExpense = (id, desc, amount) => {
+  categories.forEach( category => {
+    if (category.id == id) {
+      const objNewExpense = {
+        desc, 
+        amount: Number(amount), 
+        date: getThisDate()
+      };
+      category.expenses = [...category.expenses, objNewExpense]
+      console.log(category.expenses)
     }
   })
 }
 
-const saveExpense = id => {
-  console.log(id);
-  // Tengo el id, asi que puedo crear el objeto y guardarlo.
+const validateAddNewExpense = id => {
+  modalAddSpent.addEventListener('close', () => {
+    const desc = document.querySelector('#desc-spent').value;
+    const amount = document.querySelector('#amount-spent').value;
+    if (modalAddSpent.returnValue === 'cancel') {
+      return;
+    } else {
+      if (desc === '') {
+        alert('desc empty');
+        modalAddSpent.showModal();
+      } else {
+        if (amount === '') {
+          alert('amount is empty')
+          modalAddSpent.showModal();
+        } else {
+          saveExpense(id, desc, amount);
+        }
+      }
+    }
+  })
 }
 
 const showDetail = () => {
