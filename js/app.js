@@ -209,17 +209,16 @@ const validateAddNewExpense = id => {
   })
 }
 
-const showDetail = () => {
+const executeCardAction = () => {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('click', ev => {
+      const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
       if (ev.target.classList.contains('btn-detail')) {
-        const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
         showModalTemplate('detail', idElement);
         return;
       }
       if (ev.target.classList.contains('btn-add-spent')) {
-        const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
         showModalTemplate('add spent', idElement);
         return;
       }
@@ -233,5 +232,5 @@ btnCloseDetail.addEventListener('click', () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   createCardTemplate(categories);
-  showDetail();
+  executeCardAction();
 })
