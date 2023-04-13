@@ -142,7 +142,7 @@ const openModalDetail = (id) => {
   modalDetail.showModal();
 }
 
-const showModalTemplate = (type, id) => {
+const selectModalToShow = (type, id) => {
   switch (type) {
     case 'detail':
       openModalDetail(id);
@@ -215,11 +215,11 @@ const executeCardAction = () => {
     card.addEventListener('click', ev => {
       const idElement = ev.target.parentNode.parentNode.parentNode.getAttribute('id');
       if (ev.target.classList.contains('btn-detail')) {
-        showModalTemplate('detail', idElement);
+        selectModalToShow('detail', idElement);
         return;
       }
       if (ev.target.classList.contains('btn-add-spent')) {
-        showModalTemplate('add spent', idElement);
+        selectModalToShow('add spent', idElement);
         return;
       }
     })
