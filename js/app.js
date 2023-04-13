@@ -4,7 +4,7 @@ const tableDetail = document.querySelector('#table-detail');
 const btnCloseDetail = document.querySelector('#btn-close-detail');
 const modalAddSpent = document.querySelector('#modal-add-spent');
 
-const categories = [
+let categories = [
   {
     id: 1,
     title: 'Gastos fijos',
@@ -64,6 +64,9 @@ const calcProgress = (pLimit, pSpent) => {
 }
 
 const createCardTemplate = (data) => {
+
+  cleanCategoryTemplate();
+
   data.forEach(category => {
     let { title, limit, spent, id } = category;
 
@@ -94,12 +97,18 @@ const createCardTemplate = (data) => {
         </div>
         <div class="group">
           <button>Update</button>
-          <button>Delete</button>
+          <button class="btn-delete-category">Delete</button>
         </div>
       </div>
     `;
     container.appendChild(card);
   })
+}
+
+const cleanCategoryTemplate = () => {
+  while(container.firstChild){
+    container.removeChild(container.firstChild);
+  }
 }
 
 const cleanTableTemplate = () => {
@@ -142,6 +151,13 @@ const openModalDetail = (id) => {
   modalDetail.showModal();
 }
 
+const openModalDelete = id => {
+  const newArr = categories.filter(cat => cat.id != id);
+  categories = newArr;
+  createCardTemplate(categories);
+  console.log(categories);
+}
+
 const selectModalToShow = (type, id) => {
   switch (type) {
     case 'detail':
@@ -161,35 +177,26 @@ const selectModalToShow = (type, id) => {
   }
 }
 
-const openModalNewSpent = (id) => {
-  modalAddSpent.showModal();
-  validateAddNewExpense(id);
-}
+// const getThisDate = () => {
+//   const thisDay = new Date().getDate();
+//   const thisMonth = new Date().getMonth() + 1;
+//   const thisYear = new Date().getFullYear();
+//   return `${thisYear}-${thisMonth}-${thisDay}`;
+// }
 
-const getThisDate = () => {
-  const thisDay = new Date().getDate();
-  const thisMonth = new Date().getMonth() + 1;
-  const thisYear = new Date().getFullYear();
-  return `${thisYear}-${thisMonth}-${thisDay}`;
-}
-
-const saveExpense = (id, desc, amount) => {
-  categories.forEach( category => {
-    if (category.id == id) {
-      const objNewExpense = {
-        desc, 
-        amount: Number(amount), 
-        date: getThisDate()
-      };
-      category.expenses = [...category.expenses, objNewExpense]
-      console.log(category.expenses)
-    }
-  })
-}
-
-const validateAddNewExpense = id => {
-  console.log(id)
-}
+// const saveExpense = (id, desc, amount) => {
+//   categories.forEach( category => {
+//     if (category.id == id) {
+//       const objNewExpense = {
+//         desc, 
+//         amount: Number(amount), 
+//         date: getThisDate()
+//       };
+//       category.expenses = [...category.expenses, objNewExpense]
+//       console.log(category.expenses)
+//     }
+//   })
+// }
 
 const executeCardAction = () => {
   const cards = document.querySelectorAll('.card');
@@ -202,6 +209,10 @@ const executeCardAction = () => {
       }
       if (ev.target.classList.contains('btn-add-spent')) {
         selectModalToShow('add spent', idElement);
+        return;
+      }
+      if (ev.target.classList.contains('btn-delete-category')) {
+        selectModalToShow('delete', idElement);
         return;
       }
     })
