@@ -96,7 +96,7 @@ const createCardTemplate = (data) => {
           <button class="btn-detail">Detail</button>
         </div>
         <div class="group">
-          <button>Update</button>
+          <button class="btn-update-category">Update</button>
           <button class="btn-delete-category">Delete</button>
         </div>
       </div>
@@ -221,6 +221,10 @@ const executeCardAction = () => {
       }
       if (ev.target.classList.contains('btn-delete-category')) {
         selectModalToShow('delete', idElement);
+        return;
+      }
+      if (ev.target.classList.contains('btn-update-category')) {
+        selectModalToShow('update', idElement);
         return;
       }
     })
