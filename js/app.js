@@ -188,25 +188,7 @@ const saveExpense = (id, desc, amount) => {
 }
 
 const validateAddNewExpense = id => {
-  modalAddSpent.addEventListener('close', () => {
-    const desc = document.querySelector('#desc-spent').value;
-    const amount = document.querySelector('#amount-spent').value;
-    if (modalAddSpent.returnValue === 'cancel') {
-      return;
-    } else {
-      if (desc === '') {
-        alert('desc empty');
-        modalAddSpent.showModal();
-      } else {
-        if (amount === '') {
-          alert('amount is empty')
-          modalAddSpent.showModal();
-        } else {
-          saveExpense(id, desc, amount);
-        }
-      }
-    }
-  })
+  console.log(id)
 }
 
 const executeCardAction = () => {
