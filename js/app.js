@@ -158,6 +158,14 @@ const openModalDelete = id => {
   console.log(categories);
 }
 
+const openModalNewSpent = id => {
+  console.log('adding spent...');
+}
+
+const openModalUpdate = id => {
+  console.log('updating category...');
+}
+
 const selectModalToShow = (type, id) => {
   switch (type) {
     case 'detail':
