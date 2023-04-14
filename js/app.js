@@ -3,6 +3,7 @@ const modalDetail = document.querySelector('#modal-detail');
 const tableDetail = document.querySelector('#table-detail');
 const btnCloseDetail = document.querySelector('#btn-close-detail');
 const modalAddSpent = document.querySelector('#modal-add-spent');
+let idCategory;
 
 let categories = [
   {
@@ -151,11 +152,31 @@ const openModalDetail = (id) => {
   modalDetail.showModal();
 }
 
-const openModalDelete = id => {
-  const newArr = categories.filter(cat => cat.id != id);
-  categories = newArr;
+// Begin delete category
+const modalDelete = document.querySelector('#modal-confirm-delete-category');
+const btnCancelDelete = document.querySelector('#btn-cancel-delete');
+const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
+
+btnCancelDelete.addEventListener('click', (e) => {
+  console.log('canceled');
+})
+
+btnConfirmDelete.addEventListener('click', () => {
+  console.log('confirmed');
+  deleteCategory(idCategory);
+  console.log(idCategory)
+})
+
+const deleteCategory = id => {
+  categories = categories.filter(c => c.id != id);
+  // Cuando crea el html de nuevo no me permite abrir el modal
   createCardTemplate(categories);
-  console.log(categories);
+  console.log(categories)
+}
+// End delete category
+
+const openModalDelete = (id) => {
+  modalDelete.showModal();
 }
 
 const openModalNewSpent = id => {
@@ -178,6 +199,7 @@ const selectModalToShow = (type, id) => {
       openModalUpdate(id);
       break;
     case 'delete':
+      idCategory = id;
       openModalDelete(id);
       break;
     default:
