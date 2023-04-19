@@ -9,28 +9,13 @@ let categories = [
   {
     id: 1,
     title: 'Gastos fijos',
-    limit: 0,
+    limit: 800,
     spent: 90,
     expenses: [
       {
         desc: 'Ice cream',
         amount: 5.50,
         date: '08-04-2022'
-      },
-      {
-        desc: 'Gift',
-        amount: 150.50,
-        date: '07-04-2022'
-      },
-      {
-        desc: 'Gift',
-        amount: 150.50,
-        date: '07-04-2022'
-      },
-      {
-        desc: 'Gift',
-        amount: 150.50,
-        date: '07-04-2022'
       },
       {
         desc: 'Gift',
@@ -58,11 +43,6 @@ let categories = [
     ]
   }
 ]
-
-const calcProgress = (pLimit, pSpent) => {
-  const progress = (pSpent * 100) / pLimit;
-  if (pSpent > pLimit) progress = 100;
-}
 
 const createCardTemplate = (data) => {
 
@@ -168,6 +148,7 @@ btnConfirmDelete.addEventListener('click', () => {
 })
 
 const deleteCategory = id => {
+  debugger
   categories = categories.filter(c => c.id != id);
   // Cuando crea el html de nuevo no me permite abrir el modal
   createCardTemplate(categories);
@@ -206,27 +187,6 @@ const selectModalToShow = (type, id) => {
       break;
   }
 }
-
-// const getThisDate = () => {
-//   const thisDay = new Date().getDate();
-//   const thisMonth = new Date().getMonth() + 1;
-//   const thisYear = new Date().getFullYear();
-//   return `${thisYear}-${thisMonth}-${thisDay}`;
-// }
-
-// const saveExpense = (id, desc, amount) => {
-//   categories.forEach( category => {
-//     if (category.id == id) {
-//       const objNewExpense = {
-//         desc, 
-//         amount: Number(amount), 
-//         date: getThisDate()
-//       };
-//       category.expenses = [...category.expenses, objNewExpense]
-//       console.log(category.expenses)
-//     }
-//   })
-// }
 
 const executeCardAction = () => {
   const cards = document.querySelectorAll('.card');
