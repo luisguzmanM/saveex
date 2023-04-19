@@ -1,8 +1,17 @@
 const container = document.querySelector('#app');
+
 const modalDetail = document.querySelector('#modal-detail');
 const tableDetail = document.querySelector('#table-detail');
 const btnCloseDetail = document.querySelector('#btn-close-detail');
+
 const modalAddSpent = document.querySelector('#modal-add-spent');
+const btnCancelAdd = document.querySelector('#btn-add-cancel');
+const btnConfirmAdd = document.querySelector('#btn-add-confirm');
+
+const modalDelete = document.querySelector('#modal-confirm-delete-category');
+const btnCancelDelete = document.querySelector('#btn-cancel-delete');
+const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
+
 let idCategory;
 
 let categories = [
@@ -61,6 +70,81 @@ let categories = [
     ]
   }
 ]
+
+// begin events
+
+window.addEventListener('DOMContentLoaded', () => {
+  createCardTemplate(categories);
+  executeCardAction();
+})
+
+btnCancelDelete.addEventListener('click', (e) => {
+  console.log('canceled');
+})
+
+btnConfirmDelete.addEventListener('click', () => {
+  console.log('deleting category...');
+  categories = categories.filter(c => c.id != idCategory);
+  createCardTemplate(categories);
+  executeCardAction();
+})
+
+btnCloseDetail.addEventListener('click', () => {
+  modalDetail.close();
+})
+
+btnCancelAdd.addEventListener('click', () => {
+  console.log('add new expense canceled');
+  modalAddSpent.close();
+})
+
+const createCurrentDate = () => {
+  const day = new Date().getDate();
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+  const date = day + '-' + month + '-' + year;
+  return date;
+}
+
+btnConfirmAdd.addEventListener('click', () => {
+  console.log('add new expense confirmed');
+  const desc = String(document.querySelector('#desc-spent').value);
+  const amount = Number(document.querySelector('#amount-spent').value);
+  const validation = validateAddNewExpense(desc, amount);
+  if(validation){
+    console.log('validation success');
+    const objNewExpense = {
+      desc,
+      amount,
+      date: createCurrentDate(),
+    }
+    categories.forEach(cat => {
+      if(cat.id == idCategory){
+        let {expenses} = cat;
+        expenses.push(objNewExpense);
+      }
+    })
+    console.log(categories)
+  } else {
+    console.log('validation failed');
+  }
+})
+
+const validateAddNewExpense = (desc, amount) => {
+  if(desc === '' || desc === null || desc === undefined){
+    alert('Error: Description');  
+    return false;
+  } else {
+    if(amount === 0 || amount === '' || amount === null || amount === undefined || isNaN(amount)){
+      alert('Error: Amount');
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
+// end events
 
 const createCardTemplate = (data) => {
   cleanCategoryTemplate();
@@ -141,27 +225,12 @@ const openModalDetail = (id) => {
   modalDetail.showModal();
 }
 
-const modalDelete = document.querySelector('#modal-confirm-delete-category');
-const btnCancelDelete = document.querySelector('#btn-cancel-delete');
-const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
-
-btnCancelDelete.addEventListener('click', (e) => {
-  console.log('canceled');
-})
-
-btnConfirmDelete.addEventListener('click', () => {
-  console.log('deleting category...');
-  categories = categories.filter(c => c.id != idCategory);
-  createCardTemplate(categories);
-  executeCardAction();
-})
-
-const openModalDelete = (id) => {
+const openModalDelete = () => {
   modalDelete.showModal();
 }
 
-const openModalNewSpent = id => {
-  console.log('adding spent...');
+const openModalNewSpent = () => {
+  modalAddSpent.showModal();
 }
 
 const openModalUpdate = id => {
@@ -174,14 +243,15 @@ const selectModalToShow = (type, id) => {
       openModalDetail(id);
       break;
     case 'add spent':
-      openModalNewSpent(id);
+      idCategory = id;
+      openModalNewSpent();
       break;
     case 'update':
       openModalUpdate(id);
       break;
     case 'delete':
       idCategory = id;
-      openModalDelete(id);
+      openModalDelete();
       break;
     default:
       break;
@@ -212,12 +282,3 @@ const executeCardAction = () => {
     })
   })
 }
-
-btnCloseDetail.addEventListener('click', () => {
-  modalDetail.close();
-})
-
-window.addEventListener('DOMContentLoaded', () => {
-  createCardTemplate(categories);
-  executeCardAction();
-})
