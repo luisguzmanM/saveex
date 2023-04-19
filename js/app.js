@@ -26,6 +26,24 @@ let categories = [
   },
   {
     id: 2,
+    title: 'Street food',
+    limit: 150,
+    spent: 19.50,
+    expenses: [
+      {
+        desc: 'Malta',
+        amount: 9.00,
+        date: '16-04-2022'
+      },
+      {
+        desc: 'Document',
+        amount: 10.50,
+        date: '17-04-2022'
+      },
+    ]
+  },
+  {
+    id: 3,
     title: 'Diversión',
     limit: 500,
     spent: 100,
@@ -45,18 +63,13 @@ let categories = [
 ]
 
 const createCardTemplate = (data) => {
-
   cleanCategoryTemplate();
-
   data.forEach(category => {
     let { title, limit, spent, id } = category;
-
     let available = limit - spent;
     if (spent > limit) available = 0;
-
     let progress = (spent * 100) / limit;
     if (progress > 100) progress = 100;
-
     const card = document.createElement('div');
     card.className = 'card';
     card.setAttribute('id', id);
@@ -99,11 +112,8 @@ const cleanTableTemplate = () => {
 }
 
 const openModalDetail = (id) => {
-
   const category = categories.filter(c => c.id == id);
-
   cleanTableTemplate();
-
   const header = document.createElement('tr');
   header.innerHTML = `
   <tr>
@@ -114,7 +124,6 @@ const openModalDetail = (id) => {
   </tr>
   `;
   tableDetail.appendChild(header);
-
   category.forEach(categ => {
     const { expenses } = categ;
     expenses.forEach((exp, index) => {
@@ -132,7 +141,6 @@ const openModalDetail = (id) => {
   modalDetail.showModal();
 }
 
-// Begin delete category
 const modalDelete = document.querySelector('#modal-confirm-delete-category');
 const btnCancelDelete = document.querySelector('#btn-cancel-delete');
 const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
@@ -142,19 +150,11 @@ btnCancelDelete.addEventListener('click', (e) => {
 })
 
 btnConfirmDelete.addEventListener('click', () => {
-  console.log('confirmed');
-  deleteCategory(idCategory);
-  console.log(idCategory)
-})
-
-const deleteCategory = id => {
-  debugger
-  categories = categories.filter(c => c.id != id);
-  // Cuando crea el html de nuevo no me permite abrir el modal
+  console.log('deleting category...');
+  categories = categories.filter(c => c.id != idCategory);
   createCardTemplate(categories);
-  console.log(categories)
-}
-// End delete category
+  executeCardAction();
+})
 
 const openModalDelete = (id) => {
   modalDelete.showModal();
