@@ -18,8 +18,51 @@ body {
 #app {
   padding: 20px;
   display: flex;
+  justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+}
+
+#modal-detail {
+  min-width: 275px;
+  max-width: 95%;
+}
+
+#modal-detail table {
+  width: 99%;
+}
+
+#modal-detail table td {
+  white-space: nowrap;
+}
+
+#modal-add-spent {
+  min-width: 275px;
+  max-width: 95%;
+}
+
+#modal-add-spent form {
+  display: flex;
+  flex-direction: column;
+}
+
+#modal-add-spent div {
+  margin-top: 10px;
+}
+
+#modal-add-spent input {
+  padding: 5px;
+  margin: 5px 0;
+  border: none;
+}
+
+#modal-confirm-delete-category {
+  min-width: 275px;
+  max-width: 95%;
+}
+
+#modal-confirm-delete-category p {
+  margin: 15px 0;
 }
 
 .card {
