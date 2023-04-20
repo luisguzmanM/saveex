@@ -17,6 +17,40 @@ body {
   --max-width-modal : 95%;
 }
 
+/* Para utilizar los iconos de material solo debo crear un span con la clase material-icons 
+   Y dentro del span colocar el nombre del icono. 
+
+   Ejemplo:
+   <span class="material-icons">delete</span>
+
+   Esto pintaria en pantalla el icono de papelera.
+*/
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
 #app {
   padding: 20px;
   display: flex;
