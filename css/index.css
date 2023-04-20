@@ -12,7 +12,9 @@ body {
 }
 
 :root {
-  --primary-color: #000;
+  --primary-color   : #000;
+  --min-width-modal : 275px;
+  --max-width-modal : 95%;
 }
 
 #app {
@@ -24,8 +26,8 @@ body {
 }
 
 #modal-detail {
-  min-width: 275px;
-  max-width: 95%;
+  min-width: var(--min-width-modal);
+  max-width: var(--max-width-modal);
 }
 
 #modal-detail table {
@@ -37,8 +39,8 @@ body {
 }
 
 #modal-add-spent {
-  min-width: 275px;
-  max-width: 95%;
+  min-width: var(--min-width-modal);
+  max-width: var(--max-width-modal);
 }
 
 #modal-add-spent form {
@@ -57,8 +59,8 @@ body {
 }
 
 #modal-confirm-delete-category {
-  min-width: 275px;
-  max-width: 95%;
+  min-width: var(--min-width-modal);
+  max-width: var(--max-width-modal);
 }
 
 #modal-confirm-delete-category p {
