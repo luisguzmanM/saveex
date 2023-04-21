@@ -22,11 +22,13 @@ let categories = [
     spent: 90,
     expenses: [
       {
+        id: 1,
         desc: 'Ice cream',
         amount: 5.50,
         date: '08-04-2022'
       },
       {
+        id: 2,
         desc: 'Gift',
         amount: 150.50,
         date: '07-04-2022'
@@ -40,11 +42,13 @@ let categories = [
     spent: 19.50,
     expenses: [
       {
+        id: 1,
         desc: 'Malta',
         amount: 9.00,
         date: '16-04-2022'
       },
       {
+        id: 2,
         desc: 'Document',
         amount: 10.50,
         date: '17-04-2022'
@@ -58,11 +62,13 @@ let categories = [
     spent: 100,
     expenses: [
       {
+        id: 1,
         desc: 'Disco',
         amount: 55.50,
         date: '08-04-2022'
       },
       {
+        id: 2,
         desc: 'Concert',
         amount: 150.50,
         date: '07-04-2022'
@@ -130,6 +136,16 @@ btnConfirmAdd.addEventListener('click', () => {
   }
 })
 
+modalDetail.addEventListener('click', ev => {
+  if(ev.target.classList.contains('icon-delete-expense')){
+    const row = ev.target.parentNode.parentNode.getAttribute('id')
+    tableDetail.deleteRow(row)
+    console.log(row)
+  }
+})
+
+// end events
+
 const validateAddNewExpense = (desc, amount) => {
   if(desc === '' || desc === null || desc === undefined){
     alert('Error: Description');  
@@ -143,8 +159,6 @@ const validateAddNewExpense = (desc, amount) => {
     }
   }
 }
-
-// end events
 
 const createCardTemplate = (data) => {
   cleanCategoryTemplate();
@@ -205,6 +219,7 @@ const openModalDetail = (id) => {
     <th>Description</th>
     <th>Amount</th>
     <th>Date</th>
+    <th>Delete</th>
   </tr>
   `;
   tableDetail.appendChild(header);
@@ -213,11 +228,15 @@ const openModalDetail = (id) => {
     expenses.forEach((exp, index) => {
       const { desc, amount, date } = exp;
       const row = document.createElement('tr');
+      row.setAttribute('id', index + 1);
       row.innerHTML += `
         <td>${index + 1}</td>
         <td>${desc}</td>
         <td>${amount}</td>
         <td>${date}</td>
+        <td>
+          <span class="material-icons icon-delete-expense">delete</span>
+        </td>
       `;
       tableDetail.appendChild(row);
     })
