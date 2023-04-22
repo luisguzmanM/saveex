@@ -138,9 +138,8 @@ btnConfirmAdd.addEventListener('click', () => {
 
 modalDetail.addEventListener('click', ev => {
   if(ev.target.classList.contains('icon-delete-expense')){
-    const row = ev.target.parentNode.parentNode.getAttribute('id')
-    tableDetail.deleteRow(row)
-    console.log(row)
+    const row = ev.target.closest('tr').rowIndex;
+    tableDetail.deleteRow(row);
   }
 })
 
@@ -235,7 +234,9 @@ const openModalDetail = (id) => {
         <td>${amount}</td>
         <td>${date}</td>
         <td>
-          <span class="material-icons icon-delete-expense">delete</span>
+          <button>
+            <span class="material-icons icon-delete-expense">delete</span>
+          </button>
         </td>
       `;
       tableDetail.appendChild(row);
