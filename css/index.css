@@ -6,16 +6,20 @@
   text-decoration: none;
 }
 
+:root {
+  --primary-color: #000;
+  --min-width-modal: 275px;
+  --max-width-modal: 95%;
+  --base-color: #e0e0e0;
+  --color-text-soft: rgba(0, 0, 0, 0.7);
+}
+
 body {
   font-family: monospace;
   font-size: 16px;
+  background-color: var(--base-color);
 }
 
-:root {
-  --primary-color   : #000;
-  --min-width-modal : 275px;
-  --max-width-modal : 95%;
-}
 
 /* Para utilizar los iconos de material solo debo crear un span con la clase material-icons 
    Y dentro del span colocar el nombre del icono. 
@@ -30,7 +34,8 @@ body {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px;
+  /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -65,7 +70,28 @@ body {
   text-overflow: ellipsis;
 }
 
-#modal-detail, 
+#btn-add-new-category {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 101px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
+  padding: 10px;
+}
+
+#btn-add-new-category:active {
+  border-radius: 101px;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;
+}
+
+#modal-detail,
 #modal-add-spent,
 #modal-confirm-delete-category,
 #modal-add-category {
@@ -81,7 +107,7 @@ body {
   white-space: nowrap;
 }
 
-#modal-add-spent form, 
+#modal-add-spent form,
 #modal-add-category form {
   display: flex;
   flex-direction: column;
@@ -104,15 +130,26 @@ body {
 }
 
 .card {
-  min-width: 150px;
-  max-width: 150px;
-  box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.1);
-  border-radius: 10px;
+  color: var(--color-text-soft);
+  min-width: 160px;
+  max-width: 160px;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
+}
+
+.card:hover {
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
 }
 
 .card h1 {
@@ -122,10 +159,14 @@ body {
 
 .card .progressbar {
   width: 100%;
-  height: 5px;
-  background-color: lightgray;
+  height: 10px;
+  background-color: grey;
   margin: 0 auto;
   border-radius: 25px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+  ;
 }
 
 .card .progressbar .progress {
@@ -149,10 +190,27 @@ body {
 }
 
 .card .actions .group button {
+  color: var(--color-text-soft);
   flex: 1;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
 }
 
-table, tr, th, td {
+.card .actions .group button:active {
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 15px #cecece,
+    inset -5px -5px 15px #f2f2f2;
+}
+
+table,
+tr,
+th,
+td {
   border: 1px solid #000;
   border-collapse: collapse;
   padding: 5px;
@@ -169,7 +227,7 @@ dialog {
 }
 
 dialog::backdrop {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 dialog div {

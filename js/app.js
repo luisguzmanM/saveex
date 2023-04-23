@@ -13,7 +13,7 @@ const btnCancelDelete = document.querySelector('#btn-cancel-delete');
 const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
 
 const modalAddCategory = document.querySelector('#modal-add-category');
-const btnAddNewCategory = document.querySelector('#add-new-category');
+const btnAddNewCategory = document.querySelector('#btn-add-new-category');
 const btnCancelAddNewCategory = document.querySelector('#btn-create-category-cancel');
 const btnConfirmAddNewCategory = document.querySelector('#btn-create-category-confirm');
 
