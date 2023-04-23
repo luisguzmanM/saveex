@@ -107,9 +107,49 @@ body {
 
 #modal-detail table {
   width: 99%;
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+}
+
+#modal-detail div {
+  margin-bottom: 20px;
+  color: var(--color-text-soft);
+}
+
+#modal-detail #btn-close-detail {
+  color: var(--color-text-soft);
+  padding: 5px 11px;
+  border-radius: 100px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+}
+
+#modal-detail #btn-close-detail:active {
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
+}
+
+#modal-detail table button {
+  color: var(--color-text-soft);
+  padding: 5px 8px;
+  border-radius: 100px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+}
+
+#modal-detail table button:active {
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
 }
 
 #modal-detail table td {
+  color: var(--color-text-soft);
   white-space: nowrap;
 }
 
@@ -147,6 +187,7 @@ body {
 
 #modal-add-spent button,
 #modal-add-category button {
+  color: var(--color-text-soft);
   padding: 5px 10px;
   border-radius: 25px;
   background: #e0e0e0;
@@ -163,6 +204,26 @@ body {
 
 #modal-confirm-delete-category p {
   margin: 15px 0;
+  color: var(--color-text-soft);
+}
+
+#modal-confirm-delete-category h4,
+#modal-confirm-delete-category button {
+  color: var(--color-text-soft);
+}
+
+#modal-confirm-delete-category button {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+}
+
+#modal-confirm-delete-category button:active {
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
 }
 
 .card {
@@ -246,10 +307,11 @@ table,
 tr,
 th,
 td {
-  border: 1px solid #000;
+  border: 1px solid var(--color-text-soft);
   border-collapse: collapse;
   padding: 5px;
   text-align: center;
+  color: var(--color-text-soft);
 }
 
 dialog {
