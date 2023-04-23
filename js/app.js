@@ -4,8 +4,8 @@ const modalDetail = document.querySelector('#modal-detail');
 const tableDetail = document.querySelector('#table-detail');
 const btnCloseDetail = document.querySelector('#btn-close-detail');
 
-const modalAddSpent = document.querySelector('#modal-add-spent');
-const btnCancelAdd = document.querySelector('#btn-add-cancel');
+const modalAddNewExpense = document.querySelector('#modal-add-spent');
+const btnCancelAddNewExpense = document.querySelector('#btn-add-cancel');
 const btnConfirmAdd = document.querySelector('#btn-add-confirm');
 
 const modalDelete = document.querySelector('#modal-confirm-delete-category');
@@ -18,69 +18,7 @@ const btnCancelAddNewCategory = document.querySelector('#btn-create-category-can
 const btnConfirmAddNewCategory = document.querySelector('#btn-create-category-confirm');
 
 let idCategory;
-
-let categories = [
-  {
-    id: 1,
-    title: 'Gastos fijos',
-    limit: 800,
-    spent: 90,
-    expenses: [
-      {
-        id: 1,
-        desc: 'Ice cream',
-        amount: 5.50,
-        date: '08-04-2022'
-      },
-      {
-        id: 2,
-        desc: 'Gift',
-        amount: 150.50,
-        date: '07-04-2022'
-      },
-    ]
-  },
-  {
-    id: 2,
-    title: 'Street food',
-    limit: 150,
-    spent: 19.50,
-    expenses: [
-      {
-        id: 1,
-        desc: 'Malta',
-        amount: 9.00,
-        date: '16-04-2022'
-      },
-      {
-        id: 2,
-        desc: 'Document',
-        amount: 10.50,
-        date: '17-04-2022'
-      },
-    ]
-  },
-  {
-    id: 3,
-    title: 'Diversión',
-    limit: 500,
-    spent: 100,
-    expenses: [
-      {
-        id: 1,
-        desc: 'Disco',
-        amount: 55.50,
-        date: '08-04-2022'
-      },
-      {
-        id: 2,
-        desc: 'Concert',
-        amount: 150.50,
-        date: '07-04-2022'
-      },
-    ]
-  }
-]
+let categories = [];
 
 // begin events
 
@@ -104,41 +42,35 @@ btnCloseDetail.addEventListener('click', () => {
   modalDetail.close();
 })
 
-btnCancelAdd.addEventListener('click', () => {
-  console.log('add new expense canceled');
-  modalAddSpent.close();
-})
-
-const createCurrentDate = () => {
-  const day = new Date().getDate();
-  const month = new Date().getMonth() + 1;
-  const year = new Date().getFullYear();
-  const date = day + '-' + month + '-' + year;
-  return date;
+const createNewExpense = (pValidation, pDesc, pAmount) => {
+  if(!pValidation){
+    modalAddNewExpense.querySelector('form').reset();
+    return;
+  }
+  const objNewExpense = {
+    desc: pDesc,
+    amount: pAmount,
+    date: createCurrentDate(),
+  }
+  categories.forEach(cat => {
+    if(cat.id == idCategory){
+      let {expenses} = cat;
+      expenses.push(objNewExpense);
+    }
+  })
 }
 
+btnCancelAddNewExpense.addEventListener('click', () => {
+  modalAddNewExpense.querySelector('form').reset();
+  modalAddNewExpense.close();
+})
+
 btnConfirmAdd.addEventListener('click', () => {
-  console.log('add new expense confirmed');
   const desc = String(document.querySelector('#desc-spent').value);
   const amount = Number(document.querySelector('#amount-spent').value);
   const validation = validateForm(desc, amount);
-  if(validation){
-    console.log('validation success');
-    const objNewExpense = {
-      desc,
-      amount,
-      date: createCurrentDate(),
-    }
-    categories.forEach(cat => {
-      if(cat.id == idCategory){
-        let {expenses} = cat;
-        expenses.push(objNewExpense);
-      }
-    })
-    console.log(categories)
-  } else {
-    console.log('validation failed');
-  }
+  createNewExpense(validation, desc, amount);
+  modalAddNewExpense.querySelector('form').reset();
 })
 
 modalDetail.addEventListener('click', ev => {
@@ -149,11 +81,11 @@ modalDetail.addEventListener('click', ev => {
 })
 
 btnAddNewCategory.addEventListener('click', () => {
-  modalAddCategory.showModal()
+  modalAddCategory.showModal();
 })
 
 btnCancelAddNewCategory.addEventListener('click', () => {
-  console.log('creation new category canceled');
+  modalAddCategory.querySelector('form').reset();
   modalAddCategory.close();
 })
 
@@ -162,16 +94,31 @@ btnConfirmAddNewCategory.addEventListener('click', () => {
   const limit = document.querySelector('#categ-limit').value;
   const validation = validateForm(desc, limit);
   createNewCategory(validation, desc, limit);
+  modalAddCategory.querySelector('form').reset();
 })
 
 // end events
+
+const uuid = () => {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
+const createCurrentDate = () => {
+  const day = new Date().getDate();
+  const month = new Date().getMonth() + 1;
+  const year = new Date().getFullYear();
+  const date = day + '-' + month + '-' + year;
+  return date;
+}
 
 const createNewCategory = (pValidation, pDesc, pLimit) => {
   if(!pValidation){
     return;
   }
   const objCategory = {
-    id: 1000,
+    id: uuid(),
     title: pDesc,
     limit: pLimit,
     spent: 0,
@@ -179,6 +126,7 @@ const createNewCategory = (pValidation, pDesc, pLimit) => {
   }
   categories = [...categories, objCategory];
   createCardTemplate(categories);
+  executeCardAction();
 }
 
 const validateForm = (desc, amount) => {
@@ -286,7 +234,7 @@ const openModalDelete = () => {
 }
 
 const openModalNewSpent = () => {
-  modalAddSpent.showModal();
+  modalAddNewExpense.showModal();
 }
 
 const openModalUpdate = id => {
