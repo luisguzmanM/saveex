@@ -58,6 +58,8 @@ const createNewExpense = (pValidation, pDesc, pAmount) => {
       expenses.push(objNewExpense);
     }
   })
+  createCardTemplate(categories);
+  executeCardAction();
 }
 
 btnCancelAddNewExpense.addEventListener('click', () => {
@@ -146,7 +148,8 @@ const validateForm = (desc, amount) => {
 const createCardTemplate = (data) => {
   cleanCategoryTemplate();
   data.forEach(category => {
-    let { title, limit, spent, id } = category;
+    let { title, limit, spent, id, expenses } = category;
+    spent = expenses.reduce((acc, e) => acc + e.amount, 0);
     let available = limit - spent;
     if (spent > limit) available = 0;
     let progress = (spent * 100) / limit;
@@ -162,7 +165,7 @@ const createCardTemplate = (data) => {
       <div class="info">
         <p class="limit">Limit: ${limit}</p>
         <p class="spent">Spent: ${spent}</p>
-        <p class="percentage">Progress: ${progress}%</p>
+        <p class="percentage">Progress: ${progress.toFixed(2)}%</p>
         <p class="available">Available: ${available}</p>
       </div>
       <div class="actions">
