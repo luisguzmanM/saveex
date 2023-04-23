@@ -100,6 +100,9 @@ body {
 #modal-add-category {
   min-width: var(--min-width-modal);
   max-width: var(--max-width-modal);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: var(--base-color);
 }
 
 #modal-detail table {
@@ -123,9 +126,39 @@ body {
 
 #modal-add-spent input,
 #modal-add-category input {
-  padding: 5px;
+  padding: 5px 15px;
+  color: var(--color-text-soft);
   margin: 5px 0;
   border: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
+}
+
+#modal-add-spent label,
+#modal-add-category label,
+#modal-add-spent h4,
+#modal-add-category h4 {
+  color: var(--color-text-soft);
+}
+
+#modal-add-spent button,
+#modal-add-category button {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 10px #acacac,
+    -5px -5px 10px #ffffff;
+}
+
+#modal-add-spent button:active,
+#modal-add-category button:active {
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
 }
 
 #modal-confirm-delete-category p {
