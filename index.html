@@ -11,6 +11,22 @@
   <body>
     <div id="app"></div>
 
+    <button id="add-new-category">Add category</button>
+
+    <dialog id="modal-add-category">
+      <h4>Create new category</h4>
+      <form method="dialog">
+        <label for="categ-title">Title:</label>
+        <input type="text" id="categ-title" placeholder="Beers">
+        <label for="categ-limit">Limit:</label>
+        <input type="text" id="categ-limit" placeholder="50">
+        <div>
+          <button value="cancel" id="btn-create-category-cancel">Cancel</button>
+          <button value="confirm" id="btn-create-category-confirm">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+
     <dialog id="modal-detail">
       <div>
         <h4>Details</h4>

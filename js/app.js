@@ -12,6 +12,11 @@ const modalDelete = document.querySelector('#modal-confirm-delete-category');
 const btnCancelDelete = document.querySelector('#btn-cancel-delete');
 const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
 
+const modalAddCategory = document.querySelector('#modal-add-category');
+const btnAddNewCategory = document.querySelector('#add-new-category');
+const btnCancelAddNewCategory = document.querySelector('#btn-create-category-cancel');
+const btnConfirmAddNewCategory = document.querySelector('#btn-create-category-confirm');
+
 let idCategory;
 
 let categories = [
@@ -141,6 +146,19 @@ modalDetail.addEventListener('click', ev => {
     const row = ev.target.closest('tr').rowIndex;
     tableDetail.deleteRow(row);
   }
+})
+
+btnAddNewCategory.addEventListener('click', () => {
+  modalAddCategory.showModal()
+})
+
+btnCancelAddNewCategory.addEventListener('click', () => {
+  console.log('creation new category canceled');
+  modalAddCategory.close();
+})
+
+btnConfirmAddNewCategory.addEventListener('click', () => {
+  console.log('creation new category confirmed');
 })
 
 // end events
