@@ -163,12 +163,11 @@ body {
 .card .progressbar {
   width: 100%;
   height: 10px;
-  background-color: grey;
   margin: 0 auto;
-  border-radius: 25px;
+  border-radius: 100px;
   background: #e0e0e0;
-  box-shadow: 5px 5px 10px #acacac,
-    -5px -5px 10px #ffffff;
+  box-shadow: inset 5px 5px 10px #acacac,
+    inset -5px -5px 10px #ffffff;
   ;
 }
 
