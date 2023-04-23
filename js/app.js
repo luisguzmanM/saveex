@@ -155,7 +155,7 @@ const createCardTemplate = (data) => {
     card.className = 'card';
     card.setAttribute('id', id);
     card.innerHTML = `
-      <h1>${title}</h1>
+      <h1 class="ellipsis-text" title="${title}">${title}</h1>
       <div class="progressbar">
         <div class="progress" style="width: ${progress}%"></div>
       </div>
@@ -198,7 +198,6 @@ const openModalDetail = (id) => {
   const header = document.createElement('tr');
   header.innerHTML = `
   <tr>
-    <th>Item</th>
     <th>Description</th>
     <th>Amount</th>
     <th>Date</th>
@@ -211,9 +210,7 @@ const openModalDetail = (id) => {
     expenses.forEach((exp, index) => {
       const { desc, amount, date } = exp;
       const row = document.createElement('tr');
-      row.setAttribute('id', index + 1);
       row.innerHTML += `
-        <td>${index + 1}</td>
         <td>${desc}</td>
         <td>${amount}</td>
         <td>${date}</td>

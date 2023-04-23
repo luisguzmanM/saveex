@@ -59,6 +59,12 @@ body {
   flex-wrap: wrap;
 }
 
+.ellipsis-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 #modal-detail, 
 #modal-add-spent,
 #modal-confirm-delete-category,
