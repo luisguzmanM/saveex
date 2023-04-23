@@ -121,7 +121,7 @@ btnConfirmAdd.addEventListener('click', () => {
   console.log('add new expense confirmed');
   const desc = String(document.querySelector('#desc-spent').value);
   const amount = Number(document.querySelector('#amount-spent').value);
-  const validation = validateAddNewExpense(desc, amount);
+  const validation = validateForm(desc, amount);
   if(validation){
     console.log('validation success');
     const objNewExpense = {
@@ -158,18 +158,36 @@ btnCancelAddNewCategory.addEventListener('click', () => {
 })
 
 btnConfirmAddNewCategory.addEventListener('click', () => {
-  console.log('creation new category confirmed');
+  const desc = document.querySelector('#categ-title').value;
+  const limit = document.querySelector('#categ-limit').value;
+  const validation = validateForm(desc, limit);
+  createNewCategory(validation, desc, limit);
 })
 
 // end events
 
-const validateAddNewExpense = (desc, amount) => {
+const createNewCategory = (pValidation, pDesc, pLimit) => {
+  if(!pValidation){
+    return;
+  }
+  const objCategory = {
+    id: 1000,
+    title: pDesc,
+    limit: pLimit,
+    spent: 0,
+    expenses: []
+  }
+  categories = [...categories, objCategory];
+  createCardTemplate(categories);
+}
+
+const validateForm = (desc, amount) => {
   if(desc === '' || desc === null || desc === undefined){
-    alert('Error: Description');  
+    alert('Error: First field is wrong');  
     return false;
   } else {
     if(amount === 0 || amount === '' || amount === null || amount === undefined || isNaN(amount)){
-      alert('Error: Amount');
+      alert('Error: Second field is wrong');
       return false;
     } else {
       return true;
