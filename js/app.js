@@ -8,6 +8,8 @@ const modalAddNewExpense = document.querySelector('#modal-add-spent');
 const btnCancelAddNewExpense = document.querySelector('#btn-add-cancel');
 const btnConfirmAdd = document.querySelector('#btn-add-confirm');
 
+const modalDeleteExpense = document.querySelector('#modal-confirm-delete-expense');
+
 const modalDelete = document.querySelector('#modal-confirm-delete-category');
 const btnCancelDelete = document.querySelector('#btn-cancel-delete');
 const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
@@ -78,9 +80,21 @@ btnConfirmAdd.addEventListener('click', () => {
 modalDetail.addEventListener('click', ev => {
   if(ev.target.classList.contains('icon-delete-expense')){
     const row = ev.target.closest('tr').rowIndex;
-    tableDetail.deleteRow(row);
+    showModalDeleteExpense(row);
   }
 })
+
+const showModalDeleteExpense = (param) => {
+  modalDeleteExpense.showModal();
+  const btnConfirm = document.querySelector('#btn-confirm-delete-expense');
+  const btnCancel = document.querySelector('#btn-cancel-delete-expense');
+  btnConfirm.addEventListener('click', () => {
+    tableDetail.deleteRow(param);
+  })
+  btnCancel.addEventListener('click', () => {
+    modalDeleteExpense.close();
+  })
+}
 
 btnAddNewCategory.addEventListener('click', () => {
   modalAddCategory.showModal();
