@@ -74,6 +74,7 @@ body {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  cursor: pointer;
   background-color: transparent;
   border: none;
   display: flex;
@@ -135,6 +136,7 @@ body {
 }
 
 #modal-detail table button {
+  cursor: pointer;
   color: var(--color-text-soft);
   padding: 5px 8px;
   border-radius: 100px;
@@ -295,6 +297,7 @@ body {
 .card .actions .group button {
   color: var(--color-text-soft);
   outline: none;
+  cursor: pointer;
   border: none;               
   padding: 5px;
   display: flex;
