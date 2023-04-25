@@ -97,6 +97,7 @@ body {
 #modal-detail,
 #modal-add-spent,
 #modal-confirm-delete-category,
+#modal-confirm-delete-expense,
 #modal-add-category {
   min-width: var(--min-width-modal);
   max-width: var(--max-width-modal);
@@ -202,17 +203,21 @@ body {
     inset -5px -5px 10px #ffffff;
 }
 
-#modal-confirm-delete-category p {
+#modal-confirm-delete-category p,
+#modal-confirm-delete-expense p {
   margin: 15px 0;
   color: var(--color-text-soft);
 }
 
 #modal-confirm-delete-category h4,
-#modal-confirm-delete-category button {
+#modal-confirm-delete-category button,
+#modal-confirm-delete-expense h4,
+#modal-confirm-delete-expense button {
   color: var(--color-text-soft);
 }
 
-#modal-confirm-delete-category button {
+#modal-confirm-delete-category button,
+#modal-confirm-delete-expense button {
   padding: 5px 10px;
   border-radius: 25px;
   background: #e0e0e0;
@@ -220,7 +225,8 @@ body {
     -5px -5px 10px #ffffff;
 }
 
-#modal-confirm-delete-category button:active {
+#modal-confirm-delete-category button:active,
+#modal-confirm-delete-expense button:active {
   background: #e0e0e0;
   box-shadow: inset 5px 5px 10px #acacac,
     inset -5px -5px 10px #ffffff;
