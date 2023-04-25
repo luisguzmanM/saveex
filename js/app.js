@@ -184,14 +184,14 @@ const createCardTemplate = (data) => {
       </div>
       <div class="actions">
         <div class="group">
-          <button class="btn-add-spent" title="Add">
-            <span class="material-icons">add</span>
+          <button class="btn-add-spent material-icons" title="Add">
+            add
           </button>
-          <button class="btn-detail" title="Detail">
-            <span class="material-icons">info</span>
+          <button class="btn-detail material-icons" title="Detail">
+            info
           </button>
-          <button class="btn-delete-category" title="Delete">
-            <span class="material-icons">delete</span>
+          <button class="btn-delete-category material-icons" title="Delete">
+            delete
           </button>
         </div>
       </div>
