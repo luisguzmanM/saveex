@@ -184,12 +184,17 @@ const createCardTemplate = (data) => {
       </div>
       <div class="actions">
         <div class="group">
-          <button class="btn-add-spent">Add spent</button>
-          <button class="btn-detail">Detail</button>
+          <button class="btn-add-spent">
+            <span class="material-icons">add</span>
+          </button>
+          <button class="btn-detail" title="Detail">
+            <span class="material-icons">info</span>
+          </button>
         </div>
         <div class="group">
-          <button class="btn-update-category">Update</button>
-          <button class="btn-delete-category">Delete</button>
+          <button class="btn-delete-category">
+            <span class="material-icons">delete</span>
+          </button>
         </div>
       </div>
     `;
@@ -251,10 +256,6 @@ const openModalNewSpent = () => {
   modalAddNewExpense.showModal();
 }
 
-const openModalUpdate = id => {
-  console.log('updating category...');
-}
-
 const selectModalToShow = (type, id) => {
   switch (type) {
     case 'detail':
@@ -263,9 +264,6 @@ const selectModalToShow = (type, id) => {
     case 'add spent':
       idCategory = id;
       openModalNewSpent();
-      break;
-    case 'update':
-      openModalUpdate(id);
       break;
     case 'delete':
       idCategory = id;
@@ -291,10 +289,6 @@ const executeCardAction = () => {
       }
       if (ev.target.classList.contains('btn-delete-category')) {
         selectModalToShow('delete', idElement);
-        return;
-      }
-      if (ev.target.classList.contains('btn-update-category')) {
-        selectModalToShow('update', idElement);
         return;
       }
     })
