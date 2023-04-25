@@ -274,7 +274,7 @@ body {
 .card .progressbar .progress {
   height: 100%;
   width: 100%;
-  background-color: purple;
+  background-color: rgba(0,0,0,0.7);
   border-radius: 25px;
 }
 
