@@ -288,25 +288,29 @@ body {
 .card .actions .group {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   gap: 10px;
 }
 
 .card .actions .group button {
   color: var(--color-text-soft);
-  flex: 1;
-  border: none;
+  outline: none;
+  border: none;               
   padding: 5px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
-  box-shadow: 5px 5px 10px #acacac,
-    -5px -5px 10px #ffffff;
+  box-shadow: 5px 5px 10px #acacac,-5px -5px 10px #ffffff;
 }
 
 .card .actions .group button:active {
-  border-radius: 10px;
+  border-radius: 50%;
   background: #e0e0e0;
-  box-shadow: inset 5px 5px 15px #cecece,
-    inset -5px -5px 15px #f2f2f2;
+  box-shadow: inset 5px 5px 15px #cecece, inset -5px -5px 15px #f2f2f2;
 }
 
 table,
