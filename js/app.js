@@ -79,17 +79,24 @@ btnConfirmAdd.addEventListener('click', () => {
 
 modalDetail.addEventListener('click', ev => {
   if(ev.target.classList.contains('icon-delete-expense')){
-    const row = ev.target.closest('tr').rowIndex;
-    showModalDeleteExpense(row);
+    const index = ev.target.closest('tr').rowIndex;
+    const row = ev.target.closest('tr');
+    showModalDeleteExpense(row, index);
   }
 })
 
-const showModalDeleteExpense = (param) => {
+const showModalDeleteExpense = (row, index) => {
   modalDeleteExpense.showModal();
   const btnConfirm = document.querySelector('#btn-confirm-delete-expense');
   const btnCancel = document.querySelector('#btn-cancel-delete-expense');
   btnConfirm.addEventListener('click', () => {
-    tableDetail.deleteRow(param);
+    
+    const rows = tableDetail.querySelectorAll('tr');
+    for(let i = 0; i < rows.length; i++){
+      if(i == index){
+        row.remove();
+      }
+    }
   })
   btnCancel.addEventListener('click', () => {
     modalDeleteExpense.close();
